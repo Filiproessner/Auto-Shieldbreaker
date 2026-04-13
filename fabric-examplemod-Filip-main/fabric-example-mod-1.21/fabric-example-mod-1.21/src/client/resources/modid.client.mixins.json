@@ -1,0 +1,11 @@
+{
+	"required": true,
+	"package": "com.shieldbreaker.mixin.client",
+	"compatibilityLevel": "JAVA_21",
+	"client": [
+		"ClientPlayerEntityMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

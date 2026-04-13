@@ -1,0 +1,42 @@
+{
+	"schemaVersion": 1,
+	"id": "modid",
+	"version": "${version}",
+	"name": "Example mod",
+	"description": "This is an example description",
+	"authors": [
+		"Fip_Vip"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/Filiproessner/fabric-example-mod"
+	},
+	"license": "MIT-1.0",
+	"icon": "assets/modid/icon.png",
+	"environment": "*",
+	"accessWidener": "shieldbreaker.accesswidener",
+	"entrypoints": {
+		"main": [
+			"com.shieldbreaker.ExampleMod"
+		],
+		"client": [
+			"com.shieldbreaker.AxeBot"
+		]
+	},
+	"mixins": [
+		"modid.mixins.json",
+		{
+			"config": "modid.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.18.2",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
