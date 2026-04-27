@@ -9,7 +9,6 @@ public class ExampleMod implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		// Hier muss nichts rein, aber die Klasse MUSS existieren
-		LOGGER.info("ShieldBreaker Common Initialized (Access Widener active)");
+
 	}
 }

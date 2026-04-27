@@ -20,10 +20,10 @@ public class AxeLogic {
     public static void checkAndExecute(Minecraft client) {
         if (client.player == null || client.level == null || !AxeConfig.isEnabled || isBusy) return;
 
-        // Cooldown: Nur alle 500ms eine Aktion ausführen
+        // Cooldown
         if (System.currentTimeMillis() - lastExecutionTime < 500) return;
 
-        // Raycast-Check: Schaust du den Gegner an?
+
         HitResult hit = client.hitResult;
         if (hit == null || hit.getType() != HitResult.Type.ENTITY) return;
 
@@ -47,7 +47,7 @@ public class AxeLogic {
 
     private static void executeSafeBreak(Minecraft client, Player enemy) {
         try {
-            // Axt in der Hotbar suchen
+            // search Axe
             int axeSlot = -1;
             for (int i = 0; i < 9; i++) {
                 if (client.player.getInventory().getItem(i).getItem() instanceof AxeItem) {
@@ -61,17 +61,17 @@ public class AxeLogic {
                 int originalSlot = client.player.getInventory().getSelectedSlot();
 
 
-                // 1. Wechsel zur Axt (Paket an Server)
+
                 client.player.connection.send(new ServerboundSetCarriedItemPacket(axeSlot));
 
-                // 2. Der Schlag
+                // hit
                 client.gameMode.attack(client.player, enemy);
                 client.player.swing(InteractionHand.MAIN_HAND);
 
-                // Kurze Pause (50-100ms), damit der Server den Slot-Wechsel registriert
+                // Break
                 Thread.sleep(50 + random.nextInt(50));
 
-                // 3. Zurück zum alten Slot (Paket an Server)
+                // Back
                 client.player.connection.send(new ServerboundSetCarriedItemPacket(originalSlot));
                 //IMPORTANT !!!!
                 lastExecutionTime = System.currentTimeMillis();

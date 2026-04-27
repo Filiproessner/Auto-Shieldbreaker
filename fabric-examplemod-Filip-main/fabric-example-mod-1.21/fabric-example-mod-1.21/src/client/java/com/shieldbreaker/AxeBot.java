@@ -13,15 +13,15 @@ public class AxeBot implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        // 1. Keybinding erstellen
+
         toggleKey = KeyBindingHelper.registerKeyBinding(new KeyMapping(
                 "key.shieldbreaker.toggle", // Name in den Optionen
                 InputConstants.Type.KEYSYM,
-                GLFW.GLFW_KEY_K,            // Standard-Taste K
-                KeyMapping.Category.MISC   // Kategorie in den Optionen
+                GLFW.GLFW_KEY_K,
+                KeyMapping.Category.MISC
         ));
 
-        // 2. Jeden Tick prüfen, ob die Taste gedrückt wurde
+        // jeden Tick prüfen, ob die Taste gedrückt wurde
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (client.player == null) return;
 
@@ -29,15 +29,15 @@ public class AxeBot implements ClientModInitializer {
                 // Toggle den Status
                 AxeConfig.isEnabled = !AxeConfig.isEnabled;
 
-                // Nachricht an den Spieler (unten über der Hotbar)
-                String status = AxeConfig.isEnabled ? "§aAKTIVIERT" : "§cDEAKTIVIERT";
+                // Message to player
+                String status = AxeConfig.isEnabled ? "§aENABLED" : "§cDISABLED";
                 client.player.displayClientMessage(
                         Component.literal("§8[§6ShieldBreaker§8] " + status),
                         true
                 );
             }
 
-            // 3. Wenn aktiviert, die Logik ausführen
+            //run if enabled
             if (AxeConfig.isEnabled) {
                 AxeLogic.checkAndExecute(client);
             }
